@@ -28,14 +28,14 @@ if __name__ == '__main__':
     # get inputs for each sender
     senderConfigs = []
     for i in range(numSenders):
-        tempAvgTime = int(input(f"Enter the processing average processing time for sender {i+1} (int): "))
+        tempAvgTime = int(input(f"Enter the average processing time for sender {i+1} (int): "))
         tempFailRate = int(input(f"Enter the failure rate for sender {i+1} (%): "))
         senderConfigs.append((tempAvgTime,tempFailRate))
-
+    # start the producer
     producer = Producer(name='producer', args=[messageQueue, logging, totalMessages])
     producer.start()
     time.sleep(2)
-
+    # start the senders
     threads = []
     for i in range(numSenders):
         avgSendTime, failureRate = senderConfigs[i]
@@ -43,7 +43,7 @@ if __name__ == '__main__':
         sender.start()
         threads.append(sender)
         time.sleep(1)
-    
+    # start the monitor
     monitor = Monitor(name='monitor', args=[monitorInterval, messageStats, sendTimes, totalMessages])
     monitor.start()
     time.sleep(1)

@@ -4,6 +4,9 @@ import queue
 import time
 
 class Monitor(threading.Thread):
+    """
+    Monitor Thread Class
+    """
     def __init__(self, group=None, target=None, name=None, args=[], kwargs=None, verbose=None):
         super(Monitor,self).__init__()
         self.target = target

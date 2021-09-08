@@ -6,6 +6,9 @@ import queue
 import time
 
 class Producer(threading.Thread):
+    """
+    Producer Thread Class
+    """
     def __init__(self, group=None, target=None, name=None, args=[], kwargs=None, verbose=None):
         super(Producer,self).__init__()
         self.target = target
